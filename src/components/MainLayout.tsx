@@ -269,7 +269,10 @@ function MainLayout() {
     return true;
   };
   const handleBtnNextClick = () => {
-    setActiveTab(`${Number(activeTab) + 1}`);
+    if (activeTab !== "3") {
+      setActiveTab(`${Number(activeTab) + 1}`);
+    } else {
+    }
     error();
   };
   const handleBackStep = () => {
