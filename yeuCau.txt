@@ -1,0 +1,55 @@
+Yêu cầu
+
+Sử dụng React.
+Sử dụng ES6+.
+Sử dụng hooks.
+Tùy chọn: Sử dụng Ant Design hoặc MaterialUI.
+Tùy chọn: Sử dụng hệ thống kiểu (typescript được ưa chuộng).
+Viết Unit Tests (bất kỳ thư viện kiểm thử nào, nhưng jest được ưa chuộng).
+Viết Integration Tests.
+Thiết lập
+Vì đây là bài kiểm tra để đánh giá kỹ năng cơ bản về React, chúng tôi không tập trung vào thiết lập công cụ (webpack, babel, v.v.).
+
+Vì vậy, bạn có thể thoải mái sử dụng create react app để khởi đầu phát triển, tuy nhiên, nếu không thoải mái, việc thiết lập tùy chỉnh cũng được chào đón.
+
+Mô tả
+Chúng tôi muốn tạo một biểu mẫu với nhiều bước. Biểu mẫu này nhằm giúp người dùng đặt trước đồ ăn từ nhà hàng, dữ liệu về nhà hàng và món ăn được cung cấp trong thư mục data.
+
+Bản vẽ dây truyền cho biểu mẫu được cung cấp trong thư mục wire frames.
+
+Bước 1
+Người dùng chọn loại bữa ăn (sáng, trưa, hoặc tối).
+Họ cũng cần nhập số lượng người (tối đa 10).
+Cả hai nên là các trường bắt buộc.
+
+Bước 2
+Người dùng chọn những nhà hàng phù hợp cung cấp bữa ăn dựa trên lựa chọn ở bước đầu tiên.
+Đây cũng là một trường bắt buộc.
+
+Bước 3
+Người dùng chọn món ăn họ muốn đặt trước dựa trên bữa ăn và nhà hàng mà họ đã chọn ở hai bước đầu tiên.
+
+Họ đầu tiên chọn một món ăn.
+
+Họ cũng có thể thêm số lượng phục vụ của món ăn (mặc định là 1).
+
+Người dùng cũng không thể chọn cùng một món ăn hai lần, thay vào đó, họ có thể thêm nhiều phục vụ hơn.
+
+Tổng số món ăn (tức là Số lượng món ăn * Số lượng phục vụ tương ứng) nên lớn hơn hoặc bằng số người đã chọn ở bước đầu tiên và tối đa là 10.
+
+Bước 4
+Ở bước cuối cùng, người dùng nên có thể xem xét tất cả các lựa chọn trước đó của họ và nhấp vào nút gửi.
+
+Ghi chú
+Người dùng không thể tiến đến bước tiếp theo trừ khi họ có đầu vào hợp lệ ở bước hiện tại.
+Nếu đầu vào của họ không hợp lệ, hiển thị thông báo lỗi phù hợp.
+Ở bất kỳ bước nào, người dùng có thể quay lại và thay đổi sở thích của họ ở bước trước đó.
+Cuối cùng, khi người dùng gửi biểu mẫu, chỉ cần đăng nhập dữ liệu trên console vì hiện tại chúng tôi không cung cấp backend.
+Các chi tiết tinh tế của UX để lại cho bạn quyết định.
+
+Nộp bài
+Nộp liên kết đến kho lưu trữ mã nguồn của bạn (GitHub).
+Nộp liên kết đến ứng dụng đã triển khai (github.io/ now/ surge, v.v...)
+FAQs
+Sử dụng Thư viện
+Bạn có thể tự do sử dụng bất kỳ thư viện bên thứ ba nào bạn muốn, tuy nhiên, chúng tôi có thể yêu cầu giải thích.
