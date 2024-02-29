@@ -217,10 +217,10 @@ function MainLayout() {
   });
   const [dataStep3, setDataStep3] = useState<any>([]);
   const [messageApi, contextHolder] = message.useMessage();
-  const error = () => {
+  const error = (content: string) => {
     messageApi.open({
       type: "error",
-      content: "This is an error message",
+      content: content,
     });
   };
   console.log("🚀 ~ MainLayout ~ formData:", formData);
@@ -246,13 +246,18 @@ function MainLayout() {
       key: "3",
       label: "Step 3",
       children: (
-        <Step3 setFormData={setFormData} formData={formData} data={dataStep3} />
+        <Step3
+          setFormData={setFormData}
+          formData={formData}
+          data={dataStep3}
+          error={error}
+        />
       ),
     },
     {
       key: "4",
       label: "Review",
-      children: <Review />,
+      children: <Review formData={formData} />,
     },
   ];
 
@@ -263,17 +268,35 @@ function MainLayout() {
     if (activeTab === "2" && formData.selectedRestaurant) {
       return false;
     }
-    if (activeTab === "3") {
+    if (activeTab === "3" || activeTab === "4") {
       return false;
     }
     return true;
   };
   const handleBtnNextClick = () => {
     if (activeTab !== "3") {
-      setActiveTab(`${Number(activeTab) + 1}`);
+      if (activeTab === "4") {
+        console.log("data user order", {
+          meal: formData.selectedMeal,
+          NoOfPeople: formData.numberOfPeople,
+          Restaurant: formData.selectedRestaurant,
+          dishes: formData.selectedDish,
+        });
+      } else {
+        setActiveTab(`${Number(activeTab) + 1}`);
+      }
     } else {
+      const totalServing = formData.selectedDish.reduce(
+        (acc, item: any) => acc + item.serving,
+        0
+      );
+      console.log("🚀 ~ handleBtnNextClick ~ totalServing:", totalServing);
+      if (totalServing >= formData.numberOfPeople) {
+        setActiveTab(`${Number(activeTab) + 1}`);
+      } else {
+        error("Tổng số món ăn phải lớn hơn hoặc bằng tổng số người");
+      }
     }
-    error();
   };
   const handleBackStep = () => {
     setActiveTab(`${Number(activeTab) - 1}`);
@@ -281,9 +304,10 @@ function MainLayout() {
 
   return (
     <div>
-      <Row>
-        <Col span={6}></Col>
-        <Col span={12}>
+      {contextHolder}
+      <Row data-testid="testRenderMainLayout-1">
+        <Col md={6}></Col>
+        <Col xs={24} md={12}>
           <div style={{ marginTop: "15vh" }}>
             <Tabs centered items={items} activeKey={activeTab} />
             <div
@@ -306,15 +330,15 @@ function MainLayout() {
                 disabled={isDisabledBtnNex()}
                 onClick={handleBtnNextClick}
               >
-                Next
+                {activeTab === "4" ? "Submit" : "Next"}
               </Button>
             </div>
           </div>
         </Col>
-        <Col span={6}></Col>
+        <Col md={6}></Col>
       </Row>
     </div>
   );
 }
 
-export default MainLayout;
+export default React.memo(MainLayout);

@@ -13,7 +13,8 @@ Vì đây là bài kiểm tra để đánh giá kỹ năng cơ bản về React,
 Vì vậy, bạn có thể thoải mái sử dụng create react app để khởi đầu phát triển, tuy nhiên, nếu không thoải mái, việc thiết lập tùy chỉnh cũng được chào đón.
 
 Mô tả
-Chúng tôi muốn tạo một biểu mẫu với nhiều bước. Biểu mẫu này nhằm giúp người dùng đặt trước đồ ăn từ nhà hàng, dữ liệu về nhà hàng và món ăn được cung cấp trong thư mục data.
+Chúng tôi muốn tạo một biểu mẫu với nhiều bước. Biểu mẫu này nhằm giúp người dùng đặt trước đồ ăn từ nhà hàng, dữ liệu về nhà hàng và món ăn 
+được cung cấp trong thư mục data.
 
 Bản vẽ dây truyền cho biểu mẫu được cung cấp trong thư mục wire frames.
 

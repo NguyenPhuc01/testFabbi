@@ -16,6 +16,7 @@ export default function Step2(props: any) {
       item.availableMeals.includes(formData.selectedMeal)
     );
   }, [data, formData.selectedMeal]);
+  console.log("🚀 ~ listRestaurant ~ listRestaurant:", listRestaurant);
 
   useEffect(() => {
     setDataStep3(listRestaurant);

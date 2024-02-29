@@ -3,7 +3,8 @@ import { Button, InputNumber, Select } from "antd";
 import React, { useState } from "react";
 
 export default function Step3(props: any) {
-  const { setFormData, formData, data } = props;
+  const { setFormData, formData, data, error } = props;
+
   const [numForms, setNumForms] = useState(1);
   const [selectedDishes, setSelectedDishes] = useState<
     { name: string; serving: number }[]
@@ -15,10 +16,18 @@ export default function Step3(props: any) {
     if (formData.selectedDish[formIndex]) {
       selectedDishes[formIndex].name = value;
     } else {
-      updatedDishes.push({
-        name: value,
-        serving: formData.numberServings || 1,
-      });
+      const checkDishInArray =
+        formData.selectedDish.length > 0 &&
+        formData.selectedDish.find((item: any) => item.name === value);
+
+      if (!checkDishInArray) {
+        updatedDishes.push({
+          name: value,
+          serving: formData.numberServings || 1,
+        });
+      } else {
+        error("Không thể chọn 2 món ăn giống nhau.");
+      }
     }
     setSelectedDishes(updatedDishes);
 
@@ -50,7 +59,6 @@ export default function Step3(props: any) {
     setNumForms((prevNumForms) => prevNumForms + 1);
   };
 
-  const selectedDishNames = selectedDishes.map((dish) => dish.name);
   return (
     <div>
       {[...Array(numForms)].map((_, index) => (
@@ -71,9 +79,18 @@ export default function Step3(props: any) {
               <Select
                 placeholder="_ _ _"
                 style={{ minWidth: 200 }}
+                value={
+                  formData.selectedDish.length > 0
+                    ? formData.selectedDish[index]?.name ?? ""
+                    : ""
+                }
                 onChange={(value) => handleChangeDish(value, index)}
                 options={data
-                  .filter((item: any) => !selectedDishNames.includes(item.name))
+                  .filter(
+                    (item: any) =>
+                      item.restaurant ===
+                      formData.selectedRestaurant.split("-")[0]
+                  )
                   .map((el: any) => {
                     return {
                       value: el.name,
@@ -94,7 +111,16 @@ export default function Step3(props: any) {
           </div>
           <div>
             <div style={{ margin: "12px 0px 24px 0px" }}>
-              <span>Please enter no of servings</span>
+              <span
+                style={{
+                  display: "-webkit-box",
+                  WebkitLineClamp: 1,
+                  overflow: "hidden",
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                Please enter no of servings
+              </span>
             </div>
             <InputNumber
               min={1}
