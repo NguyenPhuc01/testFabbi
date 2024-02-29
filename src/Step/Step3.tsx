@@ -11,19 +11,15 @@ export default function Step3(props: any) {
 
   const handleChangeDish = (value: string, formIndex: number) => {
     const updatedDishes = [...selectedDishes];
-    const existingDish = updatedDishes.find((dish) => dish.name === value);
 
-    if (existingDish) {
-      // Nếu món ăn đã tồn tại, cập nhật khẩu phần của nó
-      existingDish.serving = formData.numberServings || 1;
+    if (formData.selectedDish[formIndex]) {
+      selectedDishes[formIndex].name = value;
     } else {
-      // Nếu món ăn chưa tồn tại, thêm mới vào mảng
       updatedDishes.push({
         name: value,
         serving: formData.numberServings || 1,
       });
     }
-
     setSelectedDishes(updatedDishes);
 
     setFormData({
@@ -32,11 +28,27 @@ export default function Step3(props: any) {
     });
   };
 
-  const onChangeNumberServing = (value: number | null) => {
+  const onChangeNumberServing = (value: any, index: number) => {
+    const updatedDishes = [...selectedDishes];
+
+    if (formData.selectedDish[index]) {
+      selectedDishes[index].serving = value;
+    } else {
+      updatedDishes.push({
+        name: "",
+        serving: value || 1,
+      });
+    }
+    setSelectedDishes(updatedDishes);
+
     setFormData({
       ...formData,
-      numberServings: value || 1,
+      selectedDish: updatedDishes,
     });
+    // setFormData({
+    //   ...formData,
+    //   numberServings: value || 1,
+    // });
   };
   const handleAddForm = () => {
     setNumForms((prevNumForms) => prevNumForms + 1);
@@ -93,7 +105,7 @@ export default function Step3(props: any) {
               max={10}
               style={{ minWidth: 70 }}
               defaultValue={1}
-              onChange={onChangeNumberServing}
+              onChange={(value) => onChangeNumberServing(value, index)}
             />
           </div>
         </div>
