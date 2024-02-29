@@ -3,8 +3,7 @@ import MainLayout from "../MainLayout";
 
 test("test render mainlayout component", () => {
   render(<MainLayout />);
-  //   const testElementRender = screen.getByTestId("testRenderMainLayout-1");
+  const testElementRender = screen.getByTestId("testRenderMainLayout-1");
 
-  //   expect(testElementRender).toBeInTheDocument();
-  expect(true).toBe(true);
+  expect(testElementRender).toBeInTheDocument();
 });
