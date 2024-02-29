@@ -45,10 +45,6 @@ export default function Step3(props: any) {
       ...formData,
       selectedDish: updatedDishes,
     });
-    // setFormData({
-    //   ...formData,
-    //   numberServings: value || 1,
-    // });
   };
   const handleAddForm = () => {
     setNumForms((prevNumForms) => prevNumForms + 1);
